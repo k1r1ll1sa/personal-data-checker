@@ -1,0 +1,22 @@
+footer {
+    gap: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2e303a;
+    height: 50px;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    box-shadow: #1f2028 0 1px 5px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+footer h1 {
+    font-size: 1.3rem;
+    color: #9ca3af;
+    padding-right: 20px;
+    padding-left: 20px;
+}

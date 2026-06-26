@@ -1,0 +1,71 @@
+.files-image {
+    height: 100px;
+    width: auto;
+}
+
+.empty-result-container {
+    flex-direction: column;
+    padding-top: 40px;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+}
+
+.something-result-container {
+    background-color: #2E303A;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    width: 80%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.something-result-container thead {
+    background-color: #2E303A;
+}
+
+.something-result-container thead th {
+    padding: 5px 10px;
+    color: white;
+    font-weight: 600;
+}
+
+.something-result-container thead th:first-child {
+    border-top-left-radius: 15px;
+}
+
+.something-result-container thead th:last-child {
+    border-top-right-radius: 15px;
+}
+
+.something-result-container tbody {
+    background-color: #9ca3af;
+}
+
+.something-result-container tbody td {
+    padding: 5px 10px;
+    color: white;
+    border-top: 2px solid #2E303A;
+}
+
+.something-result-container tbody tr:first-child td {
+    border-top: none;
+}
+
+.something-result-container tbody td:not(:last-child),
+.something-result-container thead th:not(:last-child) {
+    border-right: 2px solid #2E303A;
+}
+
+.something-result-container tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.something-result-container tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}

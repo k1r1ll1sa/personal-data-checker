@@ -1,0 +1,64 @@
+hr {
+    width: 80%;
+    height: 3px;
+    background-color: #E1181E;
+    border: none;
+    border-radius: 30px;
+}
+
+.main-background {
+    background-color: white;
+    width: 62%;
+    min-height: 95vh;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: #1f2028 0 1px 5px;
+    padding: 10px;
+}
+
+.main-text {
+    color: #1f2028;
+    font-size: 1.75rem;
+    margin-bottom: -10px;
+}
+
+.minor-text {
+    color: gray;
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+
+.file-chooser-background {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 15px;
+    border: 3px dashed gray;
+    background-color: darkgrey;
+    width: 400px;
+    height: 250px;
+}
+
+.file-chooser-background:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.file-chooser {
+    color: white;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+}
+
+.files-image {
+    height: 100px;
+    width: auto;
+}
