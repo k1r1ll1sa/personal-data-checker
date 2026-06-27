@@ -6,7 +6,7 @@ hr {
     border-radius: 30px;
 }
 
-.main-background {
+.mainBackground {
     background-color: white;
     width: 62%;
     min-height: 95vh;
@@ -16,19 +16,19 @@ hr {
     padding: 10px;
 }
 
-.main-text {
+.mainText {
     color: #1f2028;
     font-size: 1.75rem;
     margin-bottom: -10px;
 }
 
-.minor-text {
+.minorText {
     color: gray;
     font-size: 1.5rem;
     margin-top: 5px;
 }
 
-.file-chooser-background {
+.fileChooserBackground {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,13 +43,13 @@ hr {
     height: 250px;
 }
 
-.file-chooser-background:hover {
+.fileChooserBackground:hover {
     transform: scale(1.05);
     opacity: 0.8;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.file-chooser {
+.fileChooser {
     color: white;
     display: flex;
     width: 100%;
@@ -58,7 +58,7 @@ hr {
     gap: 80px;
 }
 
-.files-image {
+.filesImage {
     height: 100px;
     width: auto;
 }

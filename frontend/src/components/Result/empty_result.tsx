@@ -1,17 +1,17 @@
-import './result.css';
+import styles from './result.module.css';
 
 function Empty_result(){
     return (
       <div>
-          <h1 className="main-text"
+          <h1 className={styles.mainText}
               style={{fontSize: '1.5rem'}}>
               Проверенные документы</h1>
-          <div className="empty-result-container">
+          <div className={styles.emptyResultContainer}>
               <img src="../../../icons/nodocument.png"
-                   className="files-image"></img>
+                   className={styles.filesImage}></img>
           </div>
-          <h1 className="minor-text"
-            style={{fontSize: '1.3rem', paddingTop: '20px'}}>Вы ещё не загружали документы</h1>
+          <h1 className={styles.minorText}
+            style={{fontSize: '1.3rem', paddingTop: '20px'}}>Вы ещё ничего не загружали</h1>
       </div>
     );
 }

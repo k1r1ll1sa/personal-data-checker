@@ -1,9 +1,21 @@
-.files-image {
+.filesImage {
     height: 100px;
     width: auto;
 }
 
-.empty-result-container {
+.mainText {
+    color: #1f2028;
+    font-size: 1.75rem;
+    margin-bottom: -10px;
+}
+
+.minorText {
+    color: gray;
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+
+.emptyResultContainer {
     flex-direction: column;
     padding-top: 40px;
     justify-content: center;
@@ -13,7 +25,7 @@
     display: flex;
 }
 
-.something-result-container {
+.somethingResultContainer {
     background-color: #2E303A;
     text-align: center;
     margin-left: auto;
@@ -25,47 +37,47 @@
     border-radius: 15px;
 }
 
-.something-result-container thead {
+.somethingResultContainer thead {
     background-color: #2E303A;
 }
 
-.something-result-container thead th {
+.somethingResultContainer thead th {
     padding: 5px 10px;
     color: white;
     font-weight: 600;
 }
 
-.something-result-container thead th:first-child {
+.somethingResultContainer thead th:first-child {
     border-top-left-radius: 15px;
 }
 
-.something-result-container thead th:last-child {
+.somethingResultContainer thead th:last-child {
     border-top-right-radius: 15px;
 }
 
-.something-result-container tbody {
+.somethingResultContainer tbody {
     background-color: #9ca3af;
 }
 
-.something-result-container tbody td {
+.somethingResultContainer tbody td {
     padding: 5px 10px;
     color: white;
     border-top: 2px solid #2E303A;
 }
 
-.something-result-container tbody tr:first-child td {
+.somethingResultContainer tbody tr:first-child td {
     border-top: none;
 }
 
-.something-result-container tbody td:not(:last-child),
-.something-result-container thead th:not(:last-child) {
+.somethingResultContainer tbody td:not(:last-child),
+.somethingResultContainer thead th:not(:last-child) {
     border-right: 2px solid #2E303A;
 }
 
-.something-result-container tbody tr:last-child td:first-child {
+.somethingResultContainer tbody tr:last-child td:first-child {
     border-bottom-left-radius: 10px;
 }
 
-.something-result-container tbody tr:last-child td:last-child {
+.somethingResultContainer tbody tr:last-child td:last-child {
     border-bottom-right-radius: 10px;
 }

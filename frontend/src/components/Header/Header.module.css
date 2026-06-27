@@ -1,7 +1,8 @@
-.header-text {
+.headerText {
     font-size: 1.7rem;
     display: flex;
     align-items: center;
+    user-select: none;
 }
 
 .logo {
@@ -12,12 +13,12 @@
     font-size: 1.7rem;
 }
 
-.logo-icon {
+.logoIcon {
     height: 32px;
     width: auto;
 }
 
-.header-background {
+.headerBackground {
     gap: 2rem;
     display: flex;
     justify-content: space-between;

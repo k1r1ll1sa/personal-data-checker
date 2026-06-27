@@ -1,0 +1,53 @@
+.historyContainer {
+    background-color: white;
+    display: flex;
+    min-width: 300px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50px;
+    right: 10%;
+    box-shadow: #1f2028 0 1px 5px;;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.historyContainer table {
+    background-color: #2E303A;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.historyContainer table thead {
+    background-color: #2E303A;
+    color: white;
+}
+
+.historyContainer thead th {
+    height:  50px;
+    padding: 0 10px;
+}
+
+.historyContainer table tbody {
+    height: 50px;
+    background-color: #9ca3af;
+}
+
+.historyContainer tbody td {
+    padding: 5px 10px;
+    color: white;
+    border-top: 2px solid #2E303A;
+}
+
+.historyContainer tbody td:not(:last-child),
+.historyContainer thead th:not(:last-child) {
+    border-right: 2px solid #2E303A;
+}
+
+
+

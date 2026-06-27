@@ -6,8 +6,10 @@ footer {
     background-color: #2e303a;
     height: 50px;
     width: 65%;
-    margin-left: auto;
-    margin-right: auto;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     padding: 0 20px;
     box-shadow: #1f2028 0 1px 5px;
     border-top-left-radius: 15px;
@@ -15,8 +17,8 @@ footer {
 }
 
 footer h1 {
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: #9ca3af;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 30px;
+    padding-left: 30px;
 }
