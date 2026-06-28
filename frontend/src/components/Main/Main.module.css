@@ -41,9 +41,16 @@ hr {
     background-color: darkgrey;
     width: 400px;
     height: 250px;
+    cursor: pointer;
 }
 
 .fileChooserBackground:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.dragging {
     transform: scale(1.05);
     opacity: 0.8;
     transition: transform 0.2s ease, opacity 0.2s ease;
