@@ -10,6 +10,7 @@ function Main() {
     // @ts-ignore
     const [dragCounter, setDragCounter] = useState(0);
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+    const [fileType, setFileType] = useState<'.docx' | '.pdf' | 'nontype'>('nontype');
     const [uploadStatus, setUploadStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -65,6 +66,14 @@ function Main() {
         setUploadStatus('loading');
         setErrorMessage('');
 
+        if (file.type === 'application/pdf'){
+            setFileType('.pdf');
+        } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'){
+            setFileType('.docx');
+        } else {
+            setFileType('nontype');
+        }
+
         const formData = new FormData();
         formData.append('file', file);
 
@@ -81,7 +90,27 @@ function Main() {
 
             const data = await responce.json();
             console.log('Файл загружен', data);
+
+            setUploadStatus('loading');
+
+            const analyzeResponse = await fetch('http://localhost:8000/analyze', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({filename: data.filename}),
+            });
+
+            if (!analyzeResponse.ok) {
+                const errorData = await analyzeResponse.json();
+                throw new Error(errorData.detail || 'Ошибка анализа файла');
+            }
+
+            const analysisData = await analyzeResponse.json();
+            console.log(analysisData);
+
             setUploadStatus('success');
+
         } catch (error) {
             console.error(error);
             setUploadStatus('error');
@@ -111,26 +140,45 @@ function Main() {
                         style={{ display: 'none' }}/>
 
                     <div className={styles.fileChooser}>
-                        <img src="../../../icons/pdf.png"
-                             className={styles.filesImage}></img>
-                        <img src="../../../icons/docx.png"
-                             className={styles.filesImage}></img>
+                        { fileType === '.pdf' ? (
+                            <img src="../../../icons/pdf.png"
+                                className={styles.filesImage}></img>
+                        ) : fileType === '.docx' ? (
+                            <img src="../../../icons/docx.png"
+                                 className={styles.filesImage}></img>
+                        ) : uploadStatus === 'error' ? (
+                            <img src="../../../icons/error.png"
+                                className={styles.filesImage}></img>
+                        ) : (
+                            <>
+                                <img src="../../../icons/pdf.png"
+                                    className={styles.filesImage}></img>
+                                <img src="../../../icons/docx.png"
+                                    className={styles.filesImage}></img>
+                            </>
+                        )}
                     </div>
 
                     <div className={styles.fileChooser}>
                         {uploadStatus === 'loading' ? (
                             <a style={{paddingTop: '20px'}}>
                                 Загрузка...</a>
-                        ) : uploadedFile ? (
+                        ) : uploadedFile && uploadStatus === 'error' ? (
                             <a style={{paddingTop: '20px'}}>
-                                {uploadedFile.name}</a>
+                                Ошибка</a>
+                        ) : uploadedFile && uploadStatus === 'success' ? (
+                            <a style={{paddingTop: '20px'}}>
+                                Анализ завершён</a>
                         ) : (
                             <a style={{paddingTop: '20px'}}>
                                 ЗАГРУЗИТЬ ФАЙЛ</a>
                         )}
                     </div>
-                    <a style={{color: 'white'}}>
-                        .pdf или .docx до 20 Мб</a>
+                    {uploadStatus === 'idle' && (
+                        <a style={{ color: 'white' }}>
+                            .pdf или .docx до 20 Мб
+                        </a>
+                    )}
                 </div>
                 {uploadStatus === 'error' && (
                     <div style={{ color: 'red',

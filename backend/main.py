@@ -2,6 +2,7 @@ import asyncio
 import shutil
 from datetime import datetime, timedelta
 
+from Analyzer.pdf_analyzer import PDFAnalyzer
 from cryptography.x509 import extensions
 from starlette.exceptions import HTTPException
 from typing import *
@@ -9,6 +10,10 @@ from fastapi import FastAPI, UploadFile, File
 from pathlib import Path
 from starlette.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import logging
+
+logging.getLogger('pdfminer').setLevel(logging.ERROR)
+logging.getLogger('pdfplumber').setLevel(logging.ERROR)
 
 app = FastAPI(title="Personal Data Checker API")
 app.add_middleware(
@@ -31,6 +36,16 @@ class FileResponse(BaseModel):
     upload_time: str
     message: str
 
+class AnalysisResult(BaseModel):
+    filename: str
+    risk_level: str
+    total_pages: int
+    total_findings: int
+    findings: Dict[str, list]
+    analysis_time: str
+
+class AnalyzeRequest(BaseModel):
+    filename: str
 
 async def delete_file_with_timer(filename: str, delay: int = 3600):
     """Удаление файла по таймеру"""
@@ -97,6 +112,45 @@ async def upload_file(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail={e})
 
+
+@app.post("/analyze", response_model=AnalysisResult)
+async def analyze_file(request: AnalyzeRequest):
+    try:
+        filename = request.filename
+        file_path = UPLOAD_DIR / filename
+        if not file_path.exists():
+            raise HTTPException(status_code=404, detail="Файл не найден")
+
+        file_type = file_path.suffix.lower()
+        if file_type == '.pdf' or file_type == '.docx':
+            analyzer = PDFAnalyzer(file_path)
+        else:
+            raise HTTPException(status_code=400, detail="Недопустимый формат файла")
+
+        total_pages, findings, total_risk, risk_level = analyzer.analyze()
+        total_findings = sum(len(matches) for matches in findings.values())
+
+        print(f"Результат анализа файла {filename}:")
+        print(f"Количество страниц: {total_pages}")
+        print(f"Уровень риска: {risk_level}, {total_risk} очков")
+        for pattern_type, matches in findings.items():
+            if matches:
+                print(f"\n{pattern_type.upper()}: {len(matches)} совпадений")
+                for match in matches:
+                    print(f"  Страница {match['page']}: {match['masked']}")
+
+        return AnalysisResult(
+            filename = filename,
+            risk_level = risk_level,
+            total_pages = total_pages,
+            total_findings = total_findings,
+            findings = findings,
+            analysis_time = datetime.now().isoformat())
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"{e}")
 
 @app.get("/health")
 async def health_check():
